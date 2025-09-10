@@ -13,6 +13,8 @@ import PreviewBox from "./PreviewBox";
 import type { Mode, Swatch, SavedPalette } from "./types";
 import { uid, paletteFromMode } from "./color-utils";
 
+import { toTailwindTheme } from "@/lib/export-tailwind";
+
 const STORAGE_KEY = "color-palette-saved-v3";
 
 export default function ColorPalette() {
@@ -146,6 +148,20 @@ export default function ColorPalette() {
             />
             <Button onClick={savePalette} className="gap-2">
               Save
+            </Button>
+
+            {/* Export Tailwind snippet */}
+            <Button
+              variant="outline"
+              onClick={() => {
+                const code = toTailwindTheme(
+                  swatches.slice(0, size).map((s) => s.hex)
+                );
+                navigator.clipboard.writeText(code);
+                alert("📋 Tailwind config copied!");
+              }}
+            >
+              Export Tailwind
             </Button>
           </div>
         </CardContent>
