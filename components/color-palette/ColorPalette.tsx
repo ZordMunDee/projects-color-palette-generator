@@ -71,7 +71,6 @@ export default function ColorPalette() {
     [swatches]
   );
 
-  // Actions
   function randomize() {
     const fresh = generate(size, mode);
     setSwatches((prev) => prev.map((s, i) => (s.locked ? s : fresh[i])));
@@ -190,7 +189,7 @@ export default function ColorPalette() {
   );
 }
 
-/* ---------- local helpers (เฉพาะไฟล์นี้) ---------- */
+/* ---------- local helpers ---------- */
 import { type Swatch as SwatchType } from "./types";
 function generate(size: number, mode: Mode): SwatchType[] {
   return paletteFromMode(size, mode).map((hex) => ({ hex, locked: false }));
